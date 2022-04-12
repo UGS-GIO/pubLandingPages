@@ -1,0 +1,826 @@
+<html lang="en">
+
+<head>
+	<title>UGS Publications</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+	<style>
+		/* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+		.row.content {
+			height: 1500px
+		}
+
+		/* Set gray background color and 100% height */
+		.sidenav {
+			background-color: #f1f1f1;
+			height: 100%;
+		}
+
+		/* Set black background color, white text and some padding */
+		footer {
+			background-color: #555;
+			color: white;
+			padding: 15px;
+		}
+
+		/* On small screens, set height to 'auto' for sidenav and grid */
+		@media screen and (max-width: 767px) {
+			.sidenav {
+				height: auto;
+				padding: 15px;
+			}
+
+			.row.content {
+				height: auto;
+			}
+		}
+	</style>
+
+	<style>
+		/* START JE styles */
+
+		#viewDiv {
+			padding: 0;
+			margin: 0;
+			height: 200px;
+			width: 100%;
+			font-size: 11px;
+		}
+
+		#pubst {
+			font-size: 16px;
+			margin-top: 10px;
+		}
+
+		#pub-nbr {
+			font-weight: 600;
+			text-transform: uppercase;
+		}
+
+		#pub-doi {
+			color: #993300;
+		}
+
+		#pub-name {
+			font-size: 24px;
+			line-height: 30px;
+			font-weight: 600;
+			margin-bottom: 20px;
+		}
+
+		#pub-auth {
+			font-size: 14px;
+			line-height: 24px;
+			font-style: italic;
+		}
+
+		.pub-types {
+			font-size: 16px;
+			line-height: 24px;
+		}
+
+		#pub-preview {
+			border: 1px #333;
+			float: right;
+			display: inline-block;
+			font-size: 14px;
+			cursor: pointer;
+			box-shadow: 1px 1px 3px 0px #bbbbbb;
+			margin: 15px;
+		}
+
+		/* need to style for any drop-content item?? */
+		#dropcontent1 {
+			background-color: #ffffff;
+			font-weight: 400;
+			cursor: pointer;
+			margin: 10 20px;
+			width: 100%;
+			text-align: left;
+			line-height: 30px;
+		}
+
+		#dropcontent2 {
+			background-color: #ffffff;
+			font-weight: 400;
+			cursor: pointer;
+			margin: 10 20px;
+			/* width:100%; for some reason this makes the scroll bar apear */
+			text-align: left;
+			line-height: 30px;
+		}
+
+		.pub-sub {
+			text-transform: uppercase;
+			font-size: 16px;
+			line-height: 24px;
+			font-weight: 600;
+		}
+
+		.nav-stacked {
+			text-transform: uppercase;
+			font-weight: 500;
+			color: #993300;
+		}
+
+		.nav li a {
+			position: relative;
+			display: block;
+			padding: 0 15px;
+		}
+
+		.sidenav {
+			background-color: #fff;
+			overflow: auto;
+		}
+
+		.button-red {
+			align: center;
+			background-color: #993300;
+			border: none;
+			color: #fff;
+			padding: 15px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: block;
+			font-size: 14px;
+			margin: 4px;
+			cursor: pointer;
+			text-transform: uppercase;
+			font-weight: 600;
+		}
+
+		.button-red:hover {
+			color: #ffffff;
+			background-color: #16403B;
+			transition: 0.4s;
+		}
+
+		.button-dark-wide {
+			align: center;
+			background-color: #555;
+			border: none;
+			color: #fff;
+			padding: 15px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: block;
+			font-size: 14px;
+			margin: 4px;
+			cursor: pointer;
+			text-transform: uppercase;
+			font-weight: 600;
+		}
+
+		.button-dark-wide:hover {
+			color: #ffffff;
+			background-color: #16403B;
+			transition: 0.4s;
+		}
+
+		.button-light {
+			align: center;
+			background-color: #eaeaea;
+			border: none;
+			color: #993300;
+			padding: 15px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: block;
+			font-size: 14px;
+			margin: 4px;
+			cursor: pointer;
+			text-transform: uppercase;
+			font-weight: 600;
+		}
+
+		.button-light:hover {
+			color: #ffffff;
+			background-color: #993300;
+			border: none;
+			outline: none;
+			transition: 0.4s;
+		}
+
+
+		h4 {
+			color: #733016;
+			font-size: 30px;
+		}
+
+		a {
+			color: #993300;
+		}
+
+		a:hover {
+			color: #16403B;
+		}
+
+
+
+
+		div {
+			font-family: 'montserrat', 'HelveticaNeue', 'Helvetica Neue', 'Helvetica-Neue', Helvetica, Arial, sans-serif;
+		}
+
+		.column1 {
+			float: left;
+			width: 50%;
+			padding-right: 20px;
+
+		}
+
+		.column2 {
+			float: left;
+			align: center;
+			text-align: center;
+			width: 50%;
+			padding: 20px;
+			background-color: #fff;
+		}
+
+		/* Clear floats after the columns */
+		.row1:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+
+		#errordiv {
+			margin: 0 auto;
+			padding: 0;
+			position: relative;
+			z-index: 3;
+		}
+		.errortxt {
+			display:block;
+			text-align: center;
+			font: bold 22px Georgia, serif;
+			color:black;
+		}
+		.errorimg {
+			display:block;
+			max-width: 900px;
+			margin-left: auto;
+    		margin-right: auto;
+		}
+		.errortxt-small {
+			display:block;
+		}
+
+		/* END JE styles */
+	</style>
+
+	<link rel="stylesheet" href="https://js.arcgis.com/4.23/esri/themes/light/main.css" />
+	<script src="https://js.arcgis.com/4.23/"></script>
+	<script>
+
+	
+
+
+$(document).ready(function(){
+
+
+	var data = "[]";
+
+	//console.log(document.location); 
+	//console.log(document.referrer);
+
+	function getURLParameter(name, url) {
+		var uri = new URL(url);
+		var c = uri.searchParams.get("pub");
+		return c;
+
+	}
+	var param = getURLParameter('pub', document.referrer);
+	if (param === null){
+		console.log('PUB NUMBER DOESNT EXSIST');
+		createErrorPage();
+	}
+	console.log(param);
+	getData(param);
+
+	function createErrorPage(){
+		var notFound = '<div id="errordiv" style="display: block;">' +
+		'<span class="errortxt">Like Pangaea, the page you are looking for no longer exists.  <br>Sorry for the inconvenience.</span>' +
+        //'<a href="http://geology.utah.gov/" title="Home page">' +
+		'<img class="errorimg" src="pub-not-found.jpg" alt="not found" width="80%"><br><br>' +
+		//'Perhaps search for the publication you are looking for on the pub
+		   '</div>';
+		$('h4').remove();
+		document.getElementById("outmost").innerHTML = notFound;
+	}
+
+
+	function getData(pub){
+
+		$.ajax({
+				url: "https://geology.utah.gov/apps/pubs_landing/data.php",
+				type: 'GET',
+				data: {"pub": pub},
+				dataType : 'json',
+				success: function(data) {
+					console.log(data);
+					insertpubdetails(data);
+				},
+				error : function (er) {
+					console.log('there was an error in ajax request');
+					console.log(er.responseText);
+				}
+		});
+
+	}
+
+
+	function testData(data){
+		//console.log(data);
+		$.each( data, function(key,value) {
+			//console.log(key+", "+value);
+			//console.log(d);
+			//if (  value === null || value === 'undefined' || value === '' || value === ' ' ){
+			if (!value || value === ' ' || value == undefined){
+				data[key] = null;
+			} else {
+				data[key] = value;
+			}
+		});
+	}
+	
+	function insertpubdetails(data){
+		console.log(data);
+		// test to see if there ajax call to get data was successfull
+		if ( !data ){
+			createErrorPage(param);
+			throw new Error("No data was returned from ajax call!");
+		}
+
+		//console.log(data[0]);
+		testData(data[0]);
+		insertMETA(data[0]);
+
+		document.getElementById("pub-name").innerHTML = data[0].pub_name;
+		document.getElementById("pub-year").innerHTML = data[0].pub_year;
+		document.getElementById("pub-nbr").innerHTML = data[0].series_id;
+		if (data[0].pub_scale){
+			document.getElementById("pub-scale").innerHTML = data[0].pub_scale;
+		} else{
+			$( "#pub-scale" ).parent().hide();
+		}
+
+		console.log(data[0].series_id);
+		var re = new RegExp("MP-169-[A-Z]");
+		if ( data[0].series_id == 'MP-169' ){
+			console.log('ITS THE PARENT');
+			document.getElementById("rel-title").innerHTML = "Chapters";
+		} else if ( re.test(data[0].series_id) ){  //if ( re.test( data[0].series_id ) )
+			console.log('ITS A CHILD');
+			document.getElementById("rel-title").innerHTML = "Full Publication";
+		} else {  
+			console.log('ITS NEITHER');
+			document.getElementById("rel-title").innerHTML = " ";  
+		}
+
+		var pubabrv = data[0].series_id.split('-')[0];
+		//document.getElementById("pub-abrv").innerHTML = pubabrv;
+		document.getElementById("pub-doi").innerHTML = "https://doi.org/10.34191/" + data[0].series_id;
+		document.getElementById("pub-doi2").innerHTML = "https://doi.org/10.34191/" + data[0].series_id;
+		// if there's only one author, keep second authors from displaying null or comma
+		var secondauthors = "";
+		if (data[0].pub_authors){
+			secondauthors = data[0].pub_authors;
+		}
+		document.getElementById("pub-auth").innerHTML = data[0].pub_author;
+		var citation = data[0].pub_author + ', ' + secondauthors + ' ' + data[0].pub_year + ', ' + data[0].pub_name + ', ' + data[0].series + '.';
+		//$("#citation").attr('data-content', citation);
+		$("#citation").attr('data-content', citation);  //data[0].full_citation
+
+		//document.getElementById("puburl").href = data[0].pub_url;
+		console.log(data[0].bookstore_url);
+		if (data[0].bookstore_url === '#'){
+			document.getElementById("purchase").innerHTML = "hardcopy unavailable";
+			$( "#purchase" ).hide();
+		} else if (data[0].bookstore_url) {
+			document.getElementById("purchase").href = "https://www.utahmapstore.com/products/"+ data[0].series_id;
+		} else {
+			document.getElementById("purchase").innerHTML = "hardcopy unavailable";
+			$( "#purchase" ).hide();
+		}
+
+		// but if there is a related_pub field, then add it to the landing page under "related publications"
+		//console.log(data[0].related_pubs);
+		if (data[0].related_pubs){		
+			//console.log(data[0].related_pubs);
+			document.getElementById("related").innerHTML = "Adding related child forge pubs here...";
+			var link = '';
+			var pubs = JSON.parse(data[0].related_pubs);
+			$.each( pubs, function(key,value) {
+				//console.log(key+", "+value);
+				if ( isNaN(key) ){			// check if its a named array (has the pub nbr and the pub name or just pub nbrs)
+					link +='<br><a target="_parent" href="https://geology.utah.gov/publication-details/?pub='+ key +'">'+value+'</a>';
+				} else {
+					link +='<br><a target="_parent" href="https://geology.utah.gov/publication-details/?pub='+ value +'" >https://geology.utah.gov/publication-details/?pub='+value+'</a>';
+				}
+				
+			});
+			document.getElementById("related").innerHTML = link;
+		} else {
+			$( "#related" ).parent().hide();
+		}
+
+		// populate the 'preview options' menu
+		$.each( data['preview'], function(key,value) {
+			console.log(key+", "+value);
+			if (value !== null && key === '0' && value !=='null'){
+				$("#dropcontent1").append(value);	// link html crated in data.php
+			}
+			if (value !== null && key === 'preview_map'){
+				$("#dropcontent1").append("<br>"+value);	// link html crated in data.php
+			}
+		}); 
+
+		// populate the 'download options' menu
+		$.each( data['downloads'], function(key,value) {
+			//console.log(key+", "+value);
+
+			if (value !== null){
+				//document.getElementById("dropcontent2").innerHTML = '<a target="_blank" href="'+value+'" >'+key+'</a><br>';
+				$('#dropcontent2').append('<a target="_blank" href="'+value+'" >'+key+'</a><br>');
+			}
+		}); 
+
+
+
+		// get the gis or accessory data from the array (attached data table), and put it all in a popover
+		var gisdata = "";
+		$.each( data, function(key,value) {
+		//for (i = 1; i < substr.length; ++i)	//start at 1, not 0
+			//console.log(value);
+			if (value.extra_data){
+				gisdata += '<a target="_blank" href="https://ugspub.nr.utah.gov/publications/' + value.url2 + '">' + value.extra_data + '</a>&nbsp; | &nbsp;';
+			}
+		}); 
+		//console.log(gisdata);
+		// add the gis links or delete the reference if none
+/*		
+		if (gisdata !== ""){
+			$("#gis-data").attr('data-content', gisdata);
+		} else {
+			gisdata = '<img id="pub-preview" src="preview-not-available.gif" alt="thumbnail of publication" width="300">';
+			$("#gis-data").attr('data-content', gisdata);  
+		}
+*/
+
+		if (data[0].pub_thumb){
+			//document.getElementById("pub-preview").innerHTML = '<img id="pub-preview" src="https://ugspub.nr.utah.gov/publications/mappreviews/' + data[0].pub_thumb + ' alt="thumbnail of publication" width="300">';
+			//gisdata = '<img id="pub-preview" src="https://ugspub.nr.utah.gov/publications/mappreviews/' + data[0].pub_thumb + ' alt="thumbnail of publication" width="300">';
+			//$("#pub-preview").attr('source', gisdata);  
+			var imgsrc ='https://ugspub.nr.utah.gov/publications/mapthumbs/' + data[0].pub_thumb;
+			$("#pub-preview").attr('src', imgsrc);
+			if (data['preview'][0]){
+				var imgref = $(data['preview'][0]).attr('href');
+				$("#pub-preview").parent().attr('href', imgref);
+			}
+		} else {
+			$( "#pub-preview" ).hide();
+		}
+
+
+		// get the pub type (ofr, pb, etc)
+		var publisher= data[0].series;   // + '. ' + data[0].pages + ' pages';
+		document.getElementById("publisher").innerHTML = publisher;
+
+
+		// get the series ID and get the map boundaries for the area of study esri jsapi map
+		loadmap(data[0].series_id);
+
+	}	// end insertpubdetails() function
+
+
+
+
+
+function insertMETA(tag){
+	//console.log(tag);
+	$("#meta-info").append('<meta name="citation_keywords" content="'+tag.keywords+'">');
+	$("#meta-info").append('<meta name="citation_pdf_url" content="'+tag.bookstore_url+'">');
+	$("#meta-info").append('<meta name="citation_publisher" content="'+tag.pub_publisher+'">');	
+	$("#meta-info").append('<meta name="citation_authors" content="'+tag.pub_author+'">');
+	$("#meta-info").append('<meta name="citation_date" content="'+tag.pub_year+'">');
+	$("#meta-info").append('<meta name="citation_year" content="'+tag.pub_year+'">');
+	$("#meta-info").append('<meta name="citation_lastpage" content="'+tag.pub_pages+'">');
+	$("#meta-info").append('<meta name="citation_issn" content="'+tag.pub_isbn+'">');
+	$("#meta-info").append('<meta name="citation_journal_title" content="'+tag.pub_series+'">');
+}
+
+
+
+
+
+});	// end document.ready
+
+function getCitation(){
+	alert(data[0].full_citation);
+}
+
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover({container: 'body',html:true}); 		//allow html in bootstrap/download popovers  
+	$('[data-toggle="popover"]').on('click', function(e) {e.preventDefault(); return true;});	//without this clicking on popovers makes the page jump down
+	// adjust frame of parent iframe  (cant be in doc.ready)
+	if (/iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {  //if mobile then...
+		// rearrange the divs, so the downloads are at the bottom
+		$(".col-sm-9").insertBefore(".col-sm-3");
+	}
+		function frameSize(){
+		height = 0;
+		var iframe = top.document.getElementById('iframe-1');
+		if (iframe){
+			iframe.style.height= "0px";  //we must first set it to zero or it will add cumilitively
+			var body = document.body;
+			var html = document.documentElement;
+			//console.log(body.scrollHeight); console.log(body.offsetHeight); console.log(html.scrollHeight); console.log(html.offsetHeight);console.log(html.clientHeight);
+			var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+			var height = height+10; //take care of mobile bug
+			iframe.style.height= height + "px";
+			}
+		}
+		frameSize();
+
+	
+
+});	// document.ready
+
+
+
+function loadmap(seriesId){
+	require(["esri/Map", "esri/views/MapView", "esri/layers/FeatureLayer" 
+	//, "esri/layers/GraphicsLayer", "esri/Graphic", "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/rest/query"
+	//, "esri/rest/find", "esri/rest/support/FindParameters"
+	], 
+		function(Map, MapView, FeatureLayer
+		//, GraphicsLayer, Graphic, SimpleLineSymbol, SimpleFillSymbol, Query
+		//, find, FindParameters
+	) {
+		var map = new Map({
+			basemap: "streets"
+		});
+		var view = new MapView({
+			container: "viewDiv", // Reference to the scene div created in step 5
+			map: map, // Reference to the map object created before the scene
+			zoom: 5, // Sets zoom level based on level of detail (LOD)
+			center: [-111.5,39] // Sets center point of view using longitude,latitude
+		});
+
+		var mapid = seriesId;
+		console.log(mapid);
+		var findurl = "https://services.arcgis.com/ZzrwjTRez6FJiOq4/ArcGIS/rest/services/Geologic_Map_Footprints_View/FeatureServer";
+
+		const renderer = {
+			type: "simple",  // autocasts as new SimpleRenderer()
+			symbol: {
+				type: "simple-line",  // autocasts as new SimpleMarkerSymbol()
+				color: "red",
+				width: 2.5,
+			}
+		};
+
+		const footprint = new FeatureLayer({
+			url: findurl,
+			//outFields: ["name","totalwellnumber","siteid"],
+			//displayOnPan: false,
+			definitionExpression: "series_id LIKE '%" + mapid + "%'",
+			//popupTemplate: sitestemplate,
+			renderer: renderer,
+			effect: "drop-shadow(1.5px, 1.5px, 3px rgb(0 0 0 0.6))",
+			//visible: true
+		});
+		map.add(footprint);
+		
+		footprint
+		.when(() => {
+			return footprint.queryExtent();
+		})
+		.then((response) => {
+			view.goTo(response.extent);
+		});
+
+
+		/*
+		var graphicsLayer = new GraphicsLayer();
+		map.add(graphicsLayer);
+
+		var mapid = seriesId;
+		console.log(mapid);
+
+		
+		//var findTask = new FindTask("https://webmaps.geology.utah.gov/arcgis/rest/services/GeolMap/Map_Footprints/MapServer/");
+		
+		//var findParams = new FindParameters();
+
+		let queryUrl = "https://services.arcgis.com/ZzrwjTRez6FJiOq4/ArcGIS/rest/services/Geologic_Map_Footprints_View/FeatureServer";
+		let squery = new Query();
+		squery.returnGeometry = true;
+		squery.outFields = ["*"];
+		squery.where = "mapid LIKE " + mapid;
+
+		
+		var findParam = new FindParameters({
+          layerIds: [0],
+          searchFields: ["series_id"],
+		  searchText: mapid
+        });
+		
+
+		//findParams.layerIds = [0]; //default is ALL if ommited, so just omit.
+		//findParams.searchFields = ["series_id"];
+		//findParams.searchText = mapid; //performs a 'Like' SQL search on 'searchFields'
+//		findParams.contains = true; //true is default, false searches for an EXACT textual match
+//		findParams.returnGeometry = true;
+//		findParams.geometryPrecision = 1; //number of decimals to simplify returned geometries
+		//findParams.masAllowableOffset = 1;				//another way to generalize returned geometries
+
+		//findTask.execute(findParams).then(function (response) {
+//		find.find(findUrl, findParams).then(function (response) {
+		query.executeQueryJSON(queryUrl, squery).then(function (response) {
+
+			console.log(response);
+			var fillSymbol = new SimpleFillSymbol({
+				color: [0, 0, 0, 0],
+				outline: new SimpleLineSymbol({
+					color: "red",
+					width: 2
+				})
+			});
+			//console.log(response);
+			var defaultpolygon = {
+				type: "polygon", // autocasts as new Polygon()
+				rings: [			//box around state of utah
+					[-114.22, 36.92],
+					[-114.22, 42.12],
+					[-108.85, 42.12],
+					[-108.85, 36.92]
+				]
+			};
+			if (response.results[0]){
+				var r = response.results[0];
+				console.log(r.feature);
+				var polygonGraphic = new Graphic({
+					geometry: r.feature.geometry,
+					symbol: fillSymbol
+						//popupTemplate: new PopupTemplate({ title: "{Name}", content: getcontent });
+				});
+				graphicsLayer.add(polygonGraphic);
+			} else {
+				console.log('map query returned no results');
+				$( "#maparea" ).hide();
+			}
+		});			
+	
+		*/
+
+	});	//end require()
+}	// end loadMap function
+
+</script>
+
+
+
+
+
+</head>
+
+<body>
+
+	<div class="container-fluid">
+		<h4>PUBLICATION DETAILS</h4>
+		<hr>
+		<div id="outmost" class="row content">
+			<div class="col-sm-3 sidenav">
+				<div><a class="button-light" href="#section2" data-toggle="collapse"
+						data-target="#dropcontent1">Preview Options</a></div>
+				<div id="dropcontent1" name="dropcontent1" class="collapse">
+					<!-- <a href=#>None Available</a><br> -->
+				</div>
+				<div><a class="button-light"  href="#section2" data-toggle="collapse"
+						data-target="#dropcontent2">Download Options</a></div>
+				<div id="dropcontent2" name="dropcontent2" class="collapse">
+					<!-- <a href=#>None Available</a><br> -->
+				</div>
+
+				<div><a id="purchase" class="button-light" href="#section2" target="_blank">Purchase Hardcopy</a>
+				</div>
+
+				<br><br>
+				<div id="maparea">
+				<p class="pub-sub">Area of study</p>
+				<div id="viewDiv"></div>
+				</div>
+				<!--<div><br><a class="button-dark-wide" href="#section2" target="_blank">View in the 3D Map Portal</a></div>-->
+
+
+
+
+
+			</div>
+
+			<div class="col-sm-9">
+
+				<div id="pubst">
+
+					<span style="" id="pub-nbr">MP-169M </span> &nbsp;&nbsp; | &nbsp;&nbsp; <span
+						id="pub-doi">https://doi.org/10.5673/mp-169m</span>
+				</div>
+				<h2>
+					<div id="pub-name">Wireline Log and Borehole Image Interpretation for FORGE Well 58-32, Beaver
+						County, Utah, and Integration with Core Data.</div>
+				</h2>
+				<div><span class="glyphicon glyphicon-time"></span> <span class="pub-sub">Publish
+						Date:</span> <span id='pub-year'>2019</span></div><br>
+				<!-- <h5><span id="pub-abrv" class="label label-primary">MP</span></h5>  -->
+				<div id="pub-auth">
+					<p>D.A. Handwerger and J.D. McLennan.</p>
+				</div>
+
+				<hr>
+				<a href="#" target="_parent">		
+				<img id="pub-preview" src="preview-not-available.gif" alt="thumbnail of publication" width="300">
+				</a>
+
+				<div class="row1">
+					<div class="column1">
+
+						<div class="pub-types">
+							<span class="pub-sub">Publication Type</span>
+							<p id="publisher">Unknown</p>
+						</div>
+
+						<div class="pub-types">
+							<span class="pub-sub">Map Scale</span>
+							<p id="pub-scale"> not applicable </p>
+						</div>
+
+						<div class="pub-types">
+							<span class="pub-sub">DOI</span>
+							<p id="pub-doi2"><a href="https://doi.org/10.5673/OFR-686DM">https://doi.org/10.5673/mp-169m</a></p>
+						</div>
+
+						<hr>
+						<!--
+						<div class="pub-types">
+							<a id="citation" class="button-red" href="#" data-toggle="popover" data-placement="bottom" title="" data-content="Citation unavailable" data-original-title="UGS Citation" aria-describedby="popover123012">VIEW/GET CITATION</a>
+						</div>
+						<hr>
+						-->
+
+						<div class="pub-types">
+							<span id="rel-title" class="pub-sub">Chapters</span>
+							<p id="related"><a href="#"> </a></p>
+						</div>
+
+						<div id="meta-info"></div>
+
+
+					</div>
+
+
+					<div class="column2">
+						<figure id="preview"></figure>
+					</div>
+
+				</div>
+
+
+
+
+			</div>
+			<hr>
+
+		</div>
+
+		<div>
+
+			<hr>
+
+		</div>
+
+
+
+	</div>
+
+
+	</div>
+	</div>
+	</div>
+
+	<!-- <footer class="container-fluid">
+
+	</footer>   -->
+
+</body>
+
+</html>
