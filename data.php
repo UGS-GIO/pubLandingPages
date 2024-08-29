@@ -4,7 +4,7 @@ include ('connect.php');
 
 
 
-$url = parse_url($_SERVER["HTTP_REFERER"], PHP_URL_QUERY);  
+$url = parse_url($_SERVER["HTTP_REFERER"] ?? '', PHP_URL_QUERY);  
 
 
 //if parent window var isn't set, get the iframe window var
@@ -67,12 +67,12 @@ $where = " WHERE series_id='".$xhw."'";
 			};
 
 			//add download urls if any
-			if ( empty($PubURL) ||  is_null($PubURL) || $PubURL === null || $PubURL === 'undefined' || $PubURL === ' ' ) {
+			/*if ( empty($PubURL) ||  is_null($PubURL) || $PubURL === null || $PubURL === 'undefined' || $PubURL === ' ' ) {
 					$PubURLString = $string;
 					//echo "trouble at: ".$SeriesID."AHH!  ";
 			} else {
-					$PubURLString = " <a href='".$PubURL."' target='_blank' download>Report</a>" . $string;
-			};
+					//$PubURLString = " <a href='".$PubURL."' target='_blank' download>Report</a>" . $string;
+			};*/
 
 
 			//add bookstore purchase urls if any
@@ -108,7 +108,7 @@ $where = " WHERE series_id='".$xhw."'";
 			} else if ($ServiceName == '500k_Statewide') {
 				$PreviewMapURL = " <a href='https://geology.utah.gov/apps/intgeomap/index.html?sid=".$SeriesID."&layers=500k' target='_blank'>Interactive Map</a>";
 			} else {
-				$PreviewMapURL .= "";
+				$PreviewMapURL = "";
 			};
 
 
@@ -199,10 +199,13 @@ $result2->bind_result($series_id, $extra_data, $url2);
 
 // loop through result and store into temporary array
 while ($result2->fetch()) {
-
-	$column = $extra_data;  // since the name of the extra_data type changes, we'll make it the name of the key pair
-	$alldata['downloads'][$column] = "https://ugspub.nr.utah.gov/publications/" . $url2;
-		
+	if ((strpos($url2, 'http') !== false)){
+		$column = $extra_data;  // since the name of the extra_data type changes, we'll make it the name of the key pair
+		$alldata['downloads'][$column] = $url2;
+	} else {
+		$column = $extra_data;  // since the name of the extra_data type changes, we'll make it the name of the key pair
+		$alldata['downloads'][$column] = "https://ugspub.nr.utah.gov/publications/" . $url2;
+	}	
 }
 echo json_encode($alldata);
 //print "<pre>";
